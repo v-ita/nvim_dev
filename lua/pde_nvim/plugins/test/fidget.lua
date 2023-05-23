@@ -1,0 +1,1 @@
+use 'j-hui/fidget.nvim'
