@@ -46,3 +46,4 @@ end
 return M
 
 -- https://github.com/catppuccin/nvim
+-- https://www.reddit.com/r/neovim/comments/ybioer/share_your_custom_catppuccinnvim_flavour_i_will/

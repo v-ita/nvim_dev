@@ -14,13 +14,18 @@ M.dependencies = {
 	{ git .. '/nvim-ts-rainbow' },
 }
 
+M.lazy = true
+
+M.cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSEnable', 'TSDisable', 'TSModuleInfo', 'TSUpdate' }
+
 M.config = function()
 	local status, treesitter = pcall(require, 'nvim-treesitter.configs')
 	if not status then return end
 
-	-- local ensure_installed = { 'bash', 'comment', 'css', 'dart', 'diff', 'html', 'http', 'javascript', 'jsdoc', 'json', 'gitattributes', 'gitcommit', 'gitignore', 'lua', 'markdown', 'php', 'phpdoc', 'scss', 'sql', 'vim', 'vue', 'yaml' }
-	local ensure_installed = {  }
-	local ignore_install = {  }
+	local ensure_installed = { "astro", 'bash', 'comment', 'css', 'dart', 'diff', 'html', 'http', 'javascript', 'jsdoc',
+		'json', "json5", 'gitattributes', 'gitcommit', 'gitignore', "graphql", 'lua', 'markdown', 'php', 'phpdoc',
+		"prisma", 'scss', 'sql', "svelte", "tsx", "typescript", 'vim', 'vue', 'yaml' }
+	local ignore_install = {}
 
 	local setup = {
 		ensure_installed = ensure_installed,
@@ -29,6 +34,7 @@ M.config = function()
 		ignore_install = ignore_install,
 		highlight = {
 			enable = true,
+			additional_vim_regex_highlighting = false,
 			disable = { 'NvimTree' }
 		},
 		indent = {
@@ -40,6 +46,56 @@ M.config = function()
 			max_file_lines = nil
 		},
 	}
+
+	-- setup.textobjects = {
+	-- 	move = {
+	-- 		enable = true,
+	-- 		set_jumps = true, -- whether to set jumps in the jumplist
+	-- 		goto_next_start = {
+	-- 			["]]"] = "@function.outer",
+	-- 			["]m"] = "@class.outer",
+	-- 		},
+	-- 		goto_next_end = {
+	-- 			["]["] = "@function.outer",
+	-- 			["]M"] = "@class.outer",
+	-- 		},
+	-- 		goto_previous_start = {
+	-- 			["[["] = "@function.outer",
+	-- 			["[m"] = "@class.outer",
+	-- 		},
+	-- 		goto_previous_end = {
+	-- 			["[]"] = "@function.outer",
+	-- 			["[M"] = "@class.outer",
+	-- 		},
+	-- 	},
+	-- 	select = {
+	-- 		enable = true,
+
+	-- 		-- Automatically jump forward to textobj, similar to targets.vim
+	-- 		lookahead = true,
+
+	-- 		keymaps = {
+	-- 			-- You can use the capture groups defined in textobjects.scm
+	-- 			["af"] = "@function.outer",
+	-- 			["if"] = "@function.inner",
+	-- 			["ac"] = "@class.outer",
+	-- 			["ic"] = "@class.inner",
+	-- 		},
+	-- 	},
+	-- 	swap = {
+	-- 		enable = true,
+	-- 		swap_next = {
+	-- 			["~"] = "@parameter.inner",
+	-- 		},
+	-- 	},
+	-- }
+
+	-- setup.textsubjects = {
+	-- 	enable = true,
+	-- 	keymaps = {
+	-- 		['<cr>'] = 'textsubjects-smart', -- works in visual mode
+	-- 	}
+	-- }
 
 	-- only when ts_context_commentstring is installed
 	local ts_status, _ = pcall(require, 'ts_context_commentstring')
@@ -60,19 +116,25 @@ M.config = function()
 
 	-- only when nvim-autopairs is installed
 	local npairs_status, npairs = pcall(require, 'nvim-autopairs')
-    if npairs_status then
+	if npairs_status then
 		npairs.autopairs = {
 			enable = true
 		}
 	end
 
-	treesitter.setup (setup)
+	treesitter.setup(setup)
 end
 
+local o = vim.opt
+
+o.foldmethod = "expr"
+o.foldexpr = "nvim_treesitter#foldexpr()"
+o.foldenable = false
+
 -- vim.api.nvim_exec([[
--- 	set foldmethod = expr -- expr, manual, suntax, indent, marker, diff
+-- 	set foldmethod = expr " expr, manual, suntax, indent, marker, diff
 -- 	set foldexpr = nvim_treesitter#foldexpr()
--- 	set nofoldenable
+-- 	" set nofoldenable
 -- ]], true)
 
 return M

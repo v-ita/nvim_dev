@@ -5,7 +5,7 @@ local namespace = g.namespace or 'pde_nvim'
 local M = { git .. '/nvim-lspconfig' }
 
 M.dependencies = {
-	{ git .. '/schemastore.nvim' },
+    { git .. '/schemastore.nvim', ft = 'json' },
     -- { 'folke/lsp-colors.nvim' },
 }
 
@@ -27,11 +27,20 @@ M.config = function()
             settings = setting_opt.settings
         end
 
-        lspconfig[server].setup {
-            on_attach = handlers.on_attach,
-            capabilities = handlers.capabilities,
-            settings = settings
-        }
+        if server == 'bashls' then
+            lspconfig[server].setup {
+                on_attach = handlers.on_attach,
+                capabilities = handlers.capabilities,
+                settings = settings,
+                filetypes = { 'zsh', 'bash', 'sh' }
+            }
+        else
+            lspconfig[server].setup {
+                on_attach = handlers.on_attach,
+                capabilities = handlers.capabilities,
+                settings = settings
+            }
+        end
     end
 end
 

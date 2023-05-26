@@ -7,6 +7,8 @@ M.dependencies = {
 	{ git .. '/nvim-ts-context-commentstring' }
 }
 
+M.event = 'VeryLazy'
+
 M.config = function()
 	local status, comment = pcall(require, 'nvim_comment')
 	if not status then return end

@@ -17,9 +17,12 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- buffer
-map('n', '<c-s>', ':w<cr>', { desc = 'Save buffer' })
+-- map('n', '<c-s>', ':w<cr>', { desc = 'Save buffer' })
 map('n', '<s-q>', ':bd<cr>', { desc = 'Quit buffer' }) -- <c-q> <leader>Q
 -- map('n', '<s-q>', ':q<cr>', { desc = 'Quit buffer' }) -- <c-q> <leader>Q
+map('n', '<leader>ww', '<cmd>w<cr>', { desc = 'Save buffer' })
+map('n', '<leader>wq', '<cmd>wq<cr>', { desc = 'Save buffer & quit' })
+map('n', '<leader>wa', '<cmd>wa<cr>', { desc = 'Save all buffer' })
 
 -- easy insertion of a trailing ; or , from insert mode
 map('i', ';;', '<esc>A;<esc>', { desc = 'Add ;; at the end of line' })
@@ -29,7 +32,9 @@ map('i', ',,', '<esc>A,<esc>', { desc = 'Add , at the end of line' })
 map('i', 'jk', '<esc>', { desc = 'Exit insert mode' })
 
 -- exit neovim
-map({ 'i', 'v', 'n' }, '<c-q>', '<cmd>qa<cr>', { desc = 'Exit Neovim' })
+-- map({ 'i', 'v', 'n' }, '<c-q>', '<cmd>qa<cr>', { desc = 'Exit Neovim' })
+map('n', '<leader>qq', '<cmd>q<cr>', { desc = 'Quit buffer' })
+map('n', '<leader>qa', '<cmd>qa<cr>', { desc = 'Quit all buffer' })
 
 -- highlight
 map('n', '<leader>h', ':noh<cr>', { desc = 'Disable highlight' }) -- <leader>h <leader>k <esc>
@@ -38,7 +43,7 @@ map('n', '<leader>h', ':noh<cr>', { desc = 'Disable highlight' }) -- <leader>h <
 map('n', '<c-a>', 'gg<s-v>G', { desc = 'Select all' })
 
 -- do not yank/copy with x
--- map('n', 'x', '"_x', { desc = 'Cut char' }) -- this disable the transpose xp
+-- map('n', 'x', ''_x', { desc = 'Cut char' }) -- this disable the transpose xp
 
 -- swap lines
 map('n', '<c-k>', ':m-2<cr>', { desc = 'Move line up' })
@@ -56,8 +61,15 @@ map('n', '<leader>sv', ':vsplit<cr><c-w>w', { desc = 'Split vertically' })  -- l
 -- window resize
 map('n', '<c-up>', ':resize +2<cr>', { desc = 'Enlarge height' })
 map('n', '<c-down>', ':resize -2<cr>', { desc = 'Diminish height' })
-map("n", "<c-left>", ":vertical resize -2<cr>", { desc = 'Diminish width' })
-map("n", "<c-right>", ":vertical resize +2<cr>", { desc = 'Enlarge width' })
+map('n', '<c-left>', ':vertical resize -2<cr>', { desc = 'Diminish width' })
+map('n', '<c-right>', ':vertical resize +2<cr>', { desc = 'Enlarge width' })
+
+-- autoclose brackets -- can replace autopairs plugin
+-- map("i", "{", "{}<Esc>ha", {desc = 'autoclose'})
+-- map("i", "[", "[]<Esc>ha", {desc = 'autoclose'})
+-- map("i", "(", "()<Esc>ha", {desc = 'autoclose'})
+-- map("i", "\"", "\"\"<Esc>ha", {desc = 'autoclose'})
+-- map("i", "\'", "\'\'<Esc>ha", {desc = 'autoclose'})
 
 
 ------------------------- default cheat sheet -------------------------

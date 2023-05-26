@@ -1,4 +1,7 @@
-local M = { 'vim-test/vim-test' }
+local g = vim.g
+local git = g.git_username or 'taftadahir'
+
+local M = { git .. '/vim-test' }
 
 M.config = function()
     local map = require('lua.utils').map

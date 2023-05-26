@@ -2,13 +2,19 @@ return {
 	settings = {
 		-- {
 		-- 	css = {
-		-- 		validate = true
+		-- 		validate = true,
+		-- lint = {
+		-- 	unknownAtRules = 'ignore',
+		--   },
 		-- 	},
 		-- 	less = {
 		-- 		validate = true
 		-- 	},
 		-- 	scss = {
-		-- 		validate = true
+		-- 		validate = true,
+		-- lint = {
+		-- 	unknownAtRules = 'ignore',
+		--   },
 		-- 	}
 		-- }
 	}

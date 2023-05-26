@@ -1,0 +1,7 @@
+{
+    "workspace.library": [
+        "/home/tafta/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/5393ac01",
+        "/home/tafta/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/52a86173",
+        "/home/tafta/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/70d70dbc"
+    ]
+}

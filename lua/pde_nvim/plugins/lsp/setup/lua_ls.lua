@@ -5,7 +5,7 @@ return {
 				version = 'LuaJIT',
 			},
 			diagnostics = {
-				globals = { 'vim', 'pcall', 'require' },
+				globals = { 'vim', 'pcall', 'bit', 'require' },
 			},
 			telemetry = {
 				enable = false,

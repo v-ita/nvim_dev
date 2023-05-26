@@ -5,6 +5,7 @@ return {
     -- core
     'core.options',
     'core.maps',
+    'core.autocmds',
 
     -- plugins + features
     'plugins',

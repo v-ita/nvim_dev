@@ -1,17 +1,53 @@
 local g = vim.g
 local git = g.git_username or 'taftadahir'
+local namespace = g.namespace or 'pde_nvim'
+
+local helpers_status, helpers = pcall(require, namespace .. '.helpers')
+if not helpers_status then return end
+
+local map = helpers.map
 
 local M = { git .. '/nvim-cmp' }
 
 M.dependencies = {
-    { git .. '/cmp-nvim-lsp' }, -- only when lsp is enabled
-    { git .. '/cmp-nvim-lua' },
-    { git .. '/cmp-buffer' },
-    { git .. '/cmp-path' },
+    {
+        git .. '/cmp-nvim-lsp',
+        event = { "BufReadPre", "BufNewFile" },
+    }, -- only when lsp is enabled
+    {
+        git .. '/cmp-nvim-lua',
+        event = { "BufReadPre", "BufNewFile" },
+    },
+    {
+        git .. '/cmp-buffer',
+        event = { "BufReadPre", "BufNewFile" },
+    },
+    {
+        git .. '/cmp-path',
+        event = { "BufReadPre", "BufNewFile" },
+    },
     { git .. '/cmp-cmdline' },
     -- { 'hrsh7th/cmp-nvim-lsp-signature-help' },
     -- { 'kristijanhusak/vim-dadbod-completion' },
+    {
+        git .. '/LuaSnip',
+        event = { "BufReadPre", "BufNewFile" },
+    },
+    {
+        git .. '/friendly-snippets',
+        lazy = true,
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end
+    },
+    {
+        git .. '/cmp_luasnip',
+        event = { "BufReadPre", "BufNewFile" },
+    },
 }
+
+M.event = { "BufReadPre", "BufNewFile", 'VeryLazy' }
 
 M.config = function()
     local cmp_status, cmp = pcall(require, 'cmp')
@@ -64,21 +100,21 @@ M.config = function()
     local f_menu = {}
 
     for key, value in pairs({
-        nvim_lsp = 'lsp', -- only if lsp is available
+        nvim_lsp = 'lsp',     -- only if lsp is available
         nvim_lua = 'api',
         luasnip  = 'snippet', -- only if snippets is enabled
         buffer   = 'buffer',
         path     = 'path',
         cmdline  = 'cmd',
     }) do
-        local spc = string.rep(' ', 7 - string.len (value))
+        local spc = string.rep(' ', 7 - string.len(value))
         f_menu[key] = spc .. value
     end
 
     local sources = {
-        { name = 'nvim_lsp' },    -- only if lsp is enabled
+        { name = 'nvim_lsp' }, -- only if lsp is enabled
         { name = 'nvim_lua' },
-        { name = 'luasnip' },     -- only if snippets is enabled
+        { name = 'luasnip' },  -- only if snippets is enabled
         { name = 'buffer' },
         { name = 'path' },
         { name = 'cmdline' },
@@ -94,6 +130,18 @@ M.config = function()
                 luasnip.lsp_expand(args.body)
             end,
         }
+
+        -- require('luasnip.loaders.from_vscode').load({ paths = { vim.fn.stdpath('data') .. '/site/pack/packer/start/friendly-snippets' } })
+        -- require('luasnip.loaders.from_vscode').load({ paths = { vim.fn.stdpath('data') .. '/lazy/friendly-snippets' } })
+        -- require("luasnip.loaders.from_vscode").lazy_load()
+
+        luasnip.config.set_config({
+            history = true,
+            enable_autosnippets = true
+        })
+
+        map({ 'i', 's' }, '<c-n>', "<cmd>lua require'luasnip'.jump(1)<cr>", { desc = 'Snippet jump next' })
+        map({ 'i', 's' }, '<c-p>', "<cmd>lua require'luasnip'.jump(-1)<cr>", { desc = 'Snippet jump previous' })
     end
 
     setup.formatting = {
@@ -121,6 +169,19 @@ M.config = function()
     }
 
     setup.sources = cmp.config.sources(sources)
+
+    -- setup.sorting = {
+    -- 	comparators = {
+    -- 		cmp.config.compare.offset,
+    -- 		cmp.config.compare.exact,
+    -- 		cmp.config.compare.score,
+    -- 		-- require "cmp-under-comparator".under,
+    -- 		cmp.config.compare.kind,
+    -- 		cmp.config.compare.sort_text,
+    -- 		cmp.config.compare.length,
+    -- 		cmp.config.compare.order,
+    -- 	},
+    -- }
 
     cmp.setup(setup)
 
@@ -156,3 +217,4 @@ return M
 -- https://github.com/hrsh7th/cmp-path
 -- https://github.com/hrsh7th/cmp-nvim-lua
 -- https://github.com/hrsh7th/cmp-nvim-lsp
+-- https://github.com/saadparwaiz1/cmp_luasnip

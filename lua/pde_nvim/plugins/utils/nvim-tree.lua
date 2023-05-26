@@ -27,6 +27,7 @@ M.config = function()
 		},
 		actions = {
 			open_file = {
+				resize_window = true,
 				quit_on_open = false
 			}
 		},
@@ -43,6 +44,7 @@ M.config = function()
 			exclude = { '.env' },
 		},
 		renderer = {
+			add_trailing = true,
 			group_empty = true,
 			root_folder_label = true,
 			highlight_opened_files = 'name',
@@ -50,11 +52,13 @@ M.config = function()
 			icons = {
 				show = {
 					folder = true,
-					folder_arrow = false
+					file = true,
+					folder_arrow = false,
+					git = false,
 				}
 			},
 			indent_markers = {
-				enable = false
+				enable = true
 			},
 		},
 		git = {
@@ -71,7 +75,7 @@ M.keys = {
     { '<leader>ef', '<cmd>NvimTreeFindFileToggle<cr>', desc = 'Find file toggle' }
 }
 
-M.cmd = 'NvimTreeToggle'
+M.cmd = { 'NvimTree', 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeClose' }
 
 return M
 

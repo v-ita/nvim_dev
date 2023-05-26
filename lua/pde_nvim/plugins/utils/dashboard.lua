@@ -31,11 +31,18 @@ M.config = function()
             },
             project = { enable = false },
             mru = { limit = 10, icon = '  ', label = 'Recent files                                                 ', },
-            shortcut = { {
+            shortcut = { 
+            --     {
+            --     desc = ' Explorer',
+            --     group = 'DashboardShortCut',
+            --     key = 'e',
+            --     action = 'NvimTreeToggle'
+            -- },
+            {
                 desc = ' Explorer',
                 group = 'DashboardShortCut',
                 key = 'e',
-                action = 'NvimTreeToggle'
+                action = 'NeoTreeFocusToggle'
             }, {
                 desc = '  Find files',
                 group = 'DashboardShortCut',

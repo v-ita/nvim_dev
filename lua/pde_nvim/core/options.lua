@@ -1,7 +1,6 @@
 --[[
 -- OPTIONS
 ]]
-
 local o = vim.opt
 
 -- disable netrw
@@ -26,6 +25,7 @@ o.cursorcolumn = false
 o.numberwidth = 4
 o.number = true
 o.relativenumber = true
+-- o.signcolumn = 'yes'
 
 -- mouse
 o.mouse = 'a'
@@ -82,13 +82,27 @@ o.laststatus = 0
 o.cmdheight = 1 -- help hide :h hit-enter
 
 -- spell
-o.spelllang = 'en_us'
 o.spell = true
+o.spelllang = 'en_us'
+
+-- title
+-- o.title = true
+-- o.titlestring = '%<%F - nvim'
 
 -- indent-blankline
--- o.list = true
+o.list = true
 -- o.listchars:append "space:⋅"
 -- o.listchars:append "eol:↴"
+-- o.listchars = 'tab:│ ,trail:·,nbsp:+'
+o.listchars = {
+    -- Definíng symbols for hidden characters
+    eol = "↴",
+    tab = "-",
+    space = "⋅",
+}
 
 -- other
 -- o.colorcolumn = 80
+-- o.showmode = false
+-- o.swapfile = false
+-- o.matchpairs = { '(:)', '{:}', '[:]', '<:>' }

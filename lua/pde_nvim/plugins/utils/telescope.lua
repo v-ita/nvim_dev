@@ -2,12 +2,14 @@ local g = vim.g
 local git = g.git_username or 'taftadahir'
 local namespace = g.namespace or 'pde_nvim'
 
-local helpers_status, helpers = pcall(require, namespace .. '.helpers')
-if not helpers_status then return end
+-- local helpers_status, helpers = pcall(require, namespace .. '.helpers')
+-- if not helpers_status then return end
 
-local map = helpers.map
+-- local map = helpers.map
 
 local M = { git .. '/telescope.nvim' }
+
+M.lazy = true
 
 M.dependencies = {
     -- { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
@@ -74,20 +76,49 @@ M.config = function()
     -- telescope.load_extension('flutter')
     -- telescope.load_extension('noice')
 
+    -- local git_icons = {
+    --     added = icons.gitAdd,
+    --     changed = icons.gitChange,
+    --     copied = ">",
+    --     deleted = icons.gitRemove,
+    --     renamed = "➡",
+    --     unmerged = "‡",
+    --     untracked = "?",
+    -- }
+
     telescope.setup {
         defaults = {
+            -- border = false,
             -- previewer = true,
-            mappings = mappings,
+            mappings             = mappings,
             -- path_display = { truncate = 1 },
             -- prompt_prefix = '   ',
             -- selection_caret = '  ',
-            sorting_strategy = 'descending', -- ascending, descending
+            sorting_strategy     = 'descending', -- ascending, descending
             file_ignore_patterns = {
                 '.git/',
                 'node_modules',
                 'vendor',
             },
-            layout_config = layout_config
+            layout_config        = layout_config,
+            -- vimgrep_arguments    = {
+            --     'rg',
+            --     '--color=never',
+            --     '--no-heading',
+            --     '--with-filename',
+            --     '--line-number',
+            --     '--column',
+            --     '--smart-case'
+            -- },
+            -- border = {},
+            -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+            -- file_sorter          = require('telescope.sorters').get_fzy_sorter,
+            -- prompt_prefix        = '  ',
+            -- color_devicons       = true,
+            -- git_icons            = git_icons,
+            -- file_previewer       = require('telescope.previewers').vim_buffer_cat.new,
+            -- grep_previewer       = require('telescope.previewers').vim_buffer_vimgrep.new,
+            -- qflist_previewer     = require('telescope.previewers').vim_buffer_qflist.new,
         },
         pickers = {
             colorscheme = {
@@ -155,7 +186,10 @@ M.config = function()
         -- 		find_cmd = 'rg',
         -- 	},
         -- 	fzf = {
-        -- 		fuzzy = true
+        -- 		fuzzy = true,
+        --     override_generic_sorter = false,
+        --   override_file_sorter = true,
+        --   case_mode = "smart_case",
         -- 	}
         -- },
     }
@@ -169,7 +203,6 @@ M.config = function()
     --     map('n', '<leader>fs', builtin.grep_string, { desc = 'Grep string' }) -- search word under cursor
     --     map('n', '<leader>ft', builtin.colorscheme, { desc = 'Switch colorscheme' })
 
-
     --     -- map('n', '<leader>fa', builtin.commands, { desc = 'All available commands' })
     --     -- map('n', '<leader>fb', builtin.buffers, { desc = 'Buffers' })
     --     -- map('n', '<leader>fgf', builtin.git_files, { desc = 'Git files' })
@@ -182,14 +215,19 @@ M.config = function()
 
     -- telescope.load_extension('fzf')
     -- telescope.load_extension('media_files')
+    -- telescope.load_extension('neoclip')
+    -- telescope.load_extension("projects")
+    -- require('telescope').load_extension('repo')
+    -- require("telescope").load_extension("git_worktree")
 end
 
 M.keys = {
-    { '<leader>fc', ":lua require('telescope.builtin').git_commits", desc = 'Git commit' },
-    { '<leader>ff', ":lua require('telescope.builtin').find_files",  desc = 'Find files' },
-    { '<leader>fg', ":lua require('telescope.builtin').live_grep",   desc = 'Live grep' },
-    { '<leader>fs', ":lua require('telescope.builtin').grep_string", desc = 'Grep string' },
-    { '<leader>ft', ":lua require('telescope.builtin').colorscheme", desc = 'Switch colorscheme' }
+    { '<leader>fc', ":lua require('telescope.builtin').git_commits()<cr>", desc = 'Git commit' },
+    { '<leader>ff', ":lua require('telescope.builtin').find_files()<cr>",  desc = 'Find files' },
+    { '<leader>fg', ":lua require('telescope.builtin').live_grep()<cr>",   desc = 'Live grep' },
+    { '<leader>fs', ":lua require('telescope.builtin').grep_string()<cr>", desc = 'Grep string' },
+    { '<leader>ft', ":lua require('telescope.builtin').colorscheme()<cr>", desc = 'Switch colorscheme' },
+    { '<leader>fh', ":lua require('telescope.builtin').help_tags()<cr>",   desc = 'Help tags' }
 }
 
 M.cmd = 'Telescope'

@@ -7,26 +7,47 @@ local M = { git .. '/lualine.nvim' }
 -- 	{ git .. '/nvim-web-devicons' }
 -- }
 
+M.event = "VimEnter"
+
 M.config = function()
 	local status, lualine = pcall(require, 'lualine')
 	if not status then return end
 
 	lualine.setup {
-		-- theme = 'gruvbox_dark',  	-- onedark, solarized_dark, gruvbox, gruvbox_dark, everforest, dracula, ayu_mirage, ayu_dark
+		-- theme = 'gruvbox_dark',  	-- onedark, solarized_dark, gruvbox, gruvbox_dark, everforest, dracula, ayu_mirage, ayu_dark, nordic
 		options = {
+			icons_enabled = true,
+			-- theme = 'molokai',
 			section_separators = { left = '', right = '' },
 			component_separators = { left = '', right = '' },
+			-- 	component_separators = { left = "", right = "" },
+			-- section_separators = { left = "", right = "" },
+			-- ignore_focus = {},
+			-- always_divide_middle = true,
 			globalstatus = true,
 			-- disabled_filetypes = {
 			-- 	statusline = {
 			-- 		'NvimTree',
 			-- 		'tagbar',
-			-- 		'Outline'
+			-- 		'Outline',
+			--		'merginal',
+			--		'oil',
 			-- 	},
 			-- 	winbar = {
 			-- 		'NvimTree',
 			-- 		'tagbar',
 			-- 		'Trouble'
+					-- "merginal",
+					-- "fugitive",
+					-- "packer",
+					-- "netrw",
+					-- "Outline",
+					-- "text",
+					-- "log",
+					-- "help",
+					-- "Jaq",
+					-- "qf",
+				-- "oil"
 			-- 	},
 			-- },
 		},
@@ -36,7 +57,18 @@ M.config = function()
 		-- 		cond = require('noice').api.statusline.mode.has,
 		-- 		color = { fg = '#ff9e64' }
 		-- 	}
-		-- }
+		-- },
+		-- extensions = {
+		-- 	"neo-tree",
+		-- 	"quickfix",
+		-- 	"fugitive",
+		-- 	"fzf",
+		-- 	"lazy",
+		-- 	"symbols-outline",
+		-- 	"trouble",
+        -- "nvim-dap-ui",
+        -- "toggleterm",
+		--   }
 	}
 end
 

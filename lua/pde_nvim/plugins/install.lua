@@ -1,10 +1,21 @@
 local g = vim.g
-local colorscheme = g.color_scheme or 'gruvbox'
+local colorscheme = g.color_scheme or {
+    test = false,
+    name = 'nordic'
+}
 local namespace = g.namespace or 'pde_nvim'
+
+local themeInstall = ''
+
+if colorscheme.test then
+	themeInstall = 'test.' .. colorscheme.name
+else
+	themeInstall = 'color-schemes.' .. colorscheme.name
+end
 
 local plugins = {
 	-- color scheme
-	'color-schemes.' .. colorscheme,
+	themeInstall,
 
 	-- language server protocol
 	'lsp.lsp-config',
@@ -13,36 +24,41 @@ local plugins = {
 	-- completion
 	'utils.completion',
 
-	-- snippets
-	'utils.luasnip',
-
 	-- fuzzy find
 	'utils.telescope',
 
 	-- explorer
-	'utils.nvim-tree',
+	-- 'utils.nvim-tree',
+	'test.neo-tree',
 
 	-- git
 	'utils.gitsigns',
+	-- 'test.diffview',
 
 	-- ui ux
-	'utils.dashboard',		-- dashboard
-	'utils.bufferline',		-- tabulation
-	'utils.lualine', 		-- status line
-	'utils.barbecue',		-- breadcrumbs
-	'utils.nvim-web-devicons',		-- icons
+	'utils.dashboard',      -- dashboard
+	'utils.bufferline',     -- tabulation
+	'utils.lualine',        -- status line
+	'utils.barbecue',       -- breadcrumbs
+	'utils.nvim-web-devicons', -- icons
 
 	-- terminal
 	'utils.toggleterm',
 
 	-- others helpers
-	'utils.treesitter',		-- code comprehension
-	'utils.tagbar',			-- tags
-	'utils.which-key',		-- keymaps
-	'utils.comment',			-- comment
+	'utils.treesitter', -- code comprehension
+	'utils.treesitter-context',
+	'utils.tagbar',  -- tags
+	'utils.which-key', -- keymaps
+	'utils.comment', -- comment
 	'utils.colorizer',
 	'utils.autopairs',
 	'utils.autotag',
+	-- 'test.vim-startuptime',
+	-- 'test.fidget',
+	-- 'test.todo-comment',
+	-- 'test.error-lens',
+	-- 'test.neodev',
 
 	-- dashboard
 	-- require ( prefix_plugin .. 'startify' ),
@@ -54,10 +70,10 @@ local plugins = {
 	-- require ( prefix_plugin .. 'vim-test' ),
 
 	-- flutter
-	-- require ( prefix_plugin .. 'flutter-tools' ), 
+	-- require ( prefix_plugin .. 'flutter-tools' ),
 
 	-- git
-	-- require ( prefix_plugin .. 'vim-fugitive' ),
+	-- require ( prefix_plugin .. 'vim-fugitive' ),require ( prefix_plugin ..
 
 	-- comment
 	-- require ( prefix_plugin .. 'neogen' ),
@@ -70,7 +86,8 @@ local plugins = {
 	-- require ( 'plugins.setup.flutter-tools' ),
 	-- require ( prefix_plugin .. 'lsp-lines' ),
 	-- require ( prefix_plugin .. 'lightbulb' ),
-	-- require ( prefix_plugin .. 'trouble' ),
+	-- 'test.trouble',
+	-- 'test.nvim-ufo',
 	-- require ( prefix_plugin .. 'phpactor' ),
 	-- require ( prefix_plugin .. 'code-action-menu' ),
 
@@ -80,16 +97,26 @@ local plugins = {
 	-- others helpers
 	-- require ( prefix_plugin .. 'indent-blankline' ),
 	-- require ( prefix_plugin .. 'vim-illuminate' ),
-	-- require ( prefix_plugin .. 'deadcolumn' ),
+	-- 'test.deadcolumn',
 	-- require ( prefix_plugin .. 'twilight' ),
 	-- require ( prefix_plugin .. 'repeat' ),
 	-- require ( prefix_plugin .. 'vim-unimpaired' ),
 	-- require ( prefix_plugin .. 'splitjoin' ),
 	-- require ( namespace .. 'helpers.symbols-outline' ),			-- tags
+	-- 'test.vim-illuminate',
+	-- 'test.fine-cmdline',
+	-- 'test.neoscroll',
+	'test.mini',
+	-- 'test.chatgpt',
+	-- 'test.octo',
+	-- 'test.neoclip',
+	-- 'test.refactoring',
+	-- 'test.indentline',
+	'test.better-escape',
 }
 
 for key, value in pairs(plugins) do
-	plugins[key] = require ( namespace .. '.plugins.' .. value)
+	plugins[key] = require(namespace .. '.plugins.' .. value)
 end
 
 return plugins
