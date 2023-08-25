@@ -1,5 +1,4 @@
 return {
-    'bashls',
     'lua_ls',
 }
 

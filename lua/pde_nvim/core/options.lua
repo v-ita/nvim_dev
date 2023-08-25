@@ -59,7 +59,7 @@ o.shiftround = true
 o.smartindent = true
 
 -- text wrap
-o.wrap = false
+o.wrap = true
 o.breakindent = true
 
 -- scroll
