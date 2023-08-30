@@ -22,6 +22,9 @@ M.on_attach = function(_, bnfr)
     client.server_capabilities.documentSymbolProvider = false
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
+    -- if client.server_capabilities.inlayHintProvider then
+    --   vim.lsp.buf.inlay_hint(bufnr, true)
+    -- end
     
     local g = vim.g
     local namespace = g.namespace or 'pde_nvim'
@@ -83,3 +86,4 @@ M.capabilities = capabilities
 return M
 
 -- https://github.com/hrsh7th/cmp-nvim-lsp
+-- https://github.com/jessarcher/dotfiles/blob/master/nvim/lua/user/plugins/lspconfig.lua
