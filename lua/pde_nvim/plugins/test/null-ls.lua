@@ -149,3 +149,4 @@ return M
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
 -- https://www.reddit.com/r/neovim/comments/133vug0/how_to_setup_prettier_with_lsp/
 -- https://github.com/davidmh/cspell.nvim
+-- https://github.com/neovim/neovim/issues/2102
