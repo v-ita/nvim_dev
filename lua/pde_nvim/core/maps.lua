@@ -13,8 +13,6 @@ local map = helpers.map
 -- leaders
 -- remap space as leader key
 map('', '<space>', '<nop>', { desc = 'Unmap space' })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 -- buffer
 -- map('n', '<c-s>', ':w<cr>', { desc = 'Save buffer' })
