@@ -23,8 +23,6 @@ o.cursorcolumn = false
 
 -- line number
 o.numberwidth = 4
-o.number = true
-o.relativenumber = true
 -- o.signcolumn = 'yes'
 
 -- mouse
